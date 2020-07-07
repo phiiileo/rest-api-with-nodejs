@@ -2,7 +2,11 @@ const express = require('express');
 const router = require('./routes');
 const authRouter = require('./routes/authRouter');
 const app = express();
+const bodyParser = require('body-parser');
 
+
+// middlewares
+app.use(bodyParser.json())
 
 
 //main routes
