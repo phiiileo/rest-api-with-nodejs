@@ -26,7 +26,6 @@ module.exports = (req, res) => {
 
             // Get user from the dummy DB
             const isUser = db.filter(user => {
-                console.log(user)
                 return user.username === body.username
             })[0];
             console.log(isUser);
@@ -34,7 +33,6 @@ module.exports = (req, res) => {
             // Check if password sent is correct
             authIndex.comparePassword(body.password, isUser.password)
                 .then(data => {
-                    console.log(data);
                     // Get token and send response to user
                     getToken(isUser)
                 })

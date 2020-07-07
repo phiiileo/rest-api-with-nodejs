@@ -3,11 +3,17 @@ const router = require('./routes');
 const authRouter = require('./routes/authRouter');
 const app = express();
 const bodyParser = require('body-parser');
+const {
+    createConnection
+} = require('./Model/indexModel');
 
 
 // middlewares
 app.use(bodyParser.json())
 
+//Connect to MongoDB
+
+createConnection()
 
 //main routes
 app.use('/', router);
