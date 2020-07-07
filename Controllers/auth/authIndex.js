@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const saltRounds = 8;
 
-
 const hashPassword = (password) => new Promise((resolve, reject) => {
     bcrypt.hash(password, saltRounds, (err, hash) => {
         if (err) {
@@ -10,7 +9,9 @@ const hashPassword = (password) => new Promise((resolve, reject) => {
                 status: true
             })
         }
-        if (hash) resolve(hash)
+        if (hash) {
+            resolve(hash)
+        }
     });
 })
 
