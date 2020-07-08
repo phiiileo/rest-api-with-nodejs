@@ -2,6 +2,9 @@ const auth = require('./authIndex')
 const hashPassword = (password) => auth.hashPassword(password)
 const checkPassword = (password, hash) => auth.comparePassword(password, hash)
 const fs = require('fs');
+const {
+    createNewUser
+} = require('../../Model/userModel');
 
 
 let db;
@@ -29,6 +32,10 @@ module.exports = (req, res) => {
                 password: hashData,
                 userId: Math.floor(Math.random() * 100 + 1)
             });
+            createNewUser()
+                .then(data => {
+                    console.log(data)
+                })
             fs.writeFile('db.json', JSON.stringify(db), (_err, _data) => {
                 if (_err) {
                     return
@@ -40,7 +47,7 @@ module.exports = (req, res) => {
                 status: true,
                 statusCode: 200,
                 message: 'Registration was successful!',
-                token:"23456789hvcdghnjhvcd456yuikjhgfcvbhjuytredfghjkmnbvc"
+                token: "23456789hvcdghnjhvcd456yuikjhgfcvbhjuytredfghjkmnbvc"
             }))
         })
         .catch(err => {

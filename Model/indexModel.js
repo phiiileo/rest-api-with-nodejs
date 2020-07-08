@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const {
+    createNewUser
+} = require('./userModel');
 
 const createConnection = () => {
     const mongodbUrl = 'mongodb://localhost:27017/api';
@@ -10,7 +13,8 @@ const createConnection = () => {
             console.log(new Error(err).message);
             return
         }
-        console.log("Mongo Db connected successfully!")
+        console.log("Mongo Db connected successfully!");
+        // createNewUser()
     })
 }
 

@@ -29,7 +29,7 @@ module.exports = (req, res) => {
                 return user.username === body.username
             })[0];
             console.log(isUser);
-
+            
             // Check if password sent is correct
             authIndex.comparePassword(body.password, isUser.password)
                 .then(data => {
