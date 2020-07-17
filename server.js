@@ -4,13 +4,27 @@ const http = require('http');
 
 const server = http.createServer((req, res) => {
     const path = req.url;
-    if (path === '/') {
-        res.end('Welcome to the home page!')
-    } else {
-        res.statusCode = 401;
-        res.writeHead(402, "Wrong page!");
-        res.end("This page is under construction or simply a wrong link")
+    let filename = path
+    let extention = null;
+    if (path.includes("css")) {
+        extention = "css"
     }
+    if (path === '/') {
+        filename = '/index.html'
+    }
+
+    fs.readFile(`public${filename}`, 'utf8', (err, data) => {
+        if (err) {
+            console.log(err)
+            res.end("SOmething broke")
+        }
+        if (data) {
+            res.writeHead(200, {
+                "Content-Type": `text/${(extention) ? extention : "html"}`
+            })
+            res.end(data)
+        }
+    })
 })
 
 
